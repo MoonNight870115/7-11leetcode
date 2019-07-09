@@ -1,13 +1,29 @@
-#MoveZeroes
-class Solution():
-    def moveZeroes(self,nums):
+class Solution(object):
+    def sortedSquares(self, A):
         """
-        :type nums: List[int]
-        :rtype: None Do not return anything, modify nums in-place instead.
+        :type A: List[int]
+        :rtype: List[int]
         """
-        pos = 0
-        for i in range(0,len(nums)):
-            if nums[i] != 0:
-                nums[pos],nums[i] = nums[i],nums[pos]
-                pos += 1                
-        return nums
+        N = len(A)
+        j = 0  
+        while j < N and A[j] < 0:
+            j += 1
+        i = j - 1
+
+        res = []
+        while 0 <= i and j < N:
+            if A[i]**2 < A[j]**2:
+                res.append(A[i]**2)
+                i -= 1
+            else:
+                res.append(A[j]**2)
+                j += 1
+
+        while i >= 0: 
+            res.append(A[i]**2)
+            i -= 1
+        while j < N: 
+            res.append(A[j]**2)
+            j += 1
+
+        return res
